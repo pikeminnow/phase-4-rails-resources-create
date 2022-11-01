@@ -1,5 +1,7 @@
-class BirdsController < ApplicationController
+# app/controllers/birds_controller.rb #birds application controller
+# frozen_string_literal:false
 
+class BirdsController < ApplicationController
   # GET /birds
   def index
     birds = Bird.all
@@ -12,8 +14,12 @@ class BirdsController < ApplicationController
     if bird
       render json: bird
     else
-      render json: { error: "Bird not found" }, status: :not_found
+      render json: { error: 'Bird not found' }, status: :not_found
     end
   end
-
+# POST /birds
+  def create
+    bird = Bird.create(name: params[:name], species: params[:species])
+    render json: bird, status: :created
+  end
 end
